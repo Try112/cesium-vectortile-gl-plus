@@ -1,0 +1,47 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <!-- 背景透明 -->
+    <rect width="400" height="400" fill="transparent"/>
+  
+    <!-- 地球：经纬线 + 瓦片网格 -->
+    <g stroke="#2196F3" stroke-width="1.5" fill="none" opacity="0.8">
+      <!-- 外圆（赤道） -->
+      <circle cx="200" cy="200" r="70" />
+      
+      <!-- 经线（3条） -->
+      <path d="M200,130 A70,70 0 0,1 200,270" />
+      <path d="M200,130 A70,70 0 0,0 200,270" />
+      <line x1="130" y1="200" x2="270" y2="200" />
+  
+      <!-- 瓦片网格（示意 MVT 分块） -->
+      <rect x="165" y="165" width="35" height="35" stroke-dasharray="2,2" opacity="0.6"/>
+      <rect x="200" y="165" width="35" height="35" stroke-dasharray="2,2" opacity="0.6"/>
+      <rect x="165" y="200" width="35" height="35" stroke-dasharray="2,2" opacity="0.6"/>
+    </g>
+  
+    <!-- Mapbox 风格水滴（POI） -->
+    <path d="M200,165 
+             C205,160 210,165 210,170 
+             C210,190 200,200 200,200 
+             C200,200 190,190 190,170 
+             C190,165 195,160 200,165 Z"
+          fill="#2196F3" opacity="0.95"/>
+  
+    <!-- 矢量数据流（从水滴延伸出的 MVT 折线） -->
+    <path d="M200,200 
+             L210,210 
+             L230,205 
+             L250,220 
+             L270,210"
+          fill="none"
+          stroke="#2196F3"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  
+    <!-- 项目名称 -->
+    <text x="200" y="330" text-anchor="middle"
+          font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', monospace"
+          font-size="24" fill="#2196F3" font-weight="600">
+      CVT-GL
+    </text>
+  </svg>

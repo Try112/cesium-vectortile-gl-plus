@@ -1,0 +1,11 @@
+# https://docs.github.com/cn/get-started/getting-started-with-git/configuring-git-to-handle-line-endings
+
+# 自动将所有文本文件的行尾符转换为 LF（Unix 风格）
+* text=auto eol=lf
+
+# 声明所有文件都将在检出时使用 CRLF 行尾符
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
+
+# 声明所有图标、图片、字体等二进制文件都不应被修改
+*.{ico,png,jpg,jpeg,gif,webp,svg,woff,woff2,bin,exe,glb,gltf,obj,mtl} binary

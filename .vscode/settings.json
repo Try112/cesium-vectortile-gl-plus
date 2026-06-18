@@ -1,0 +1,25 @@
+{
+  "editor.tabSize": 2,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "editor.guides.bracketPairs": "active", // 激活当前作用域的垂直引导线
+  "editor.bracketPairColorization.enabled": true, // 彩色括号
+  "files.eol": "\n", // 默认使用 LF（Linux/Mac），Windows 也建议统一为 LF
+  "files.autoGuessEncoding": true, // 保存时自动转换换行符
+  "explorer.fileNesting.patterns": {
+    // 配置.env的嵌套规则：.env.production 作为子文件
+    "*.env": "$(capture).env.*",
+    // 可同时配置其他文件的嵌套规则（如package.json），按需添加
+    "package.json": "pnpm-lock.yaml,pnpm-workspace.yaml,.gitattributes,.gitignore,.gitpod.yml,.npmrc,.browserslistrc,.node-version,.git*,.tazerc.json",
+    "eslint.config.mjs": ".eslintignore, prettier.config.mjs, .prettierignore, .prettierignore,.stylelintignore,.commitlintrc.*,.prettierrc.*,stylelint.config.*,.lintstagedrc.mjs,cspell.json,lefthook.yml"
+  },
+  // 可选：开启自动嵌套（默认已开启）
+  "explorer.fileNesting.enabled": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

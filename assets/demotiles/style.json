@@ -1,0 +1,146 @@
+{
+  "id": "43f36e14-e3f5-43c1-84c0-50a9c80dc5c7",
+  "name": "MapLibre",
+  "zoom": 0.8619833357855968,
+  "pitch": 0,
+  "center": [17.65431710431244, 32.954120326746775],
+  "glyphs": "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "us-states-fill-test",
+      "type": "fill",
+      "source": "us_states",
+      "minzoom": 0,
+      "maxzoom": 24,
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "#ff3333",
+        "fill-opacity": 0.55,
+        "fill-outline-color": "#ffffff"
+      }
+    },
+    {
+      "id": "us-states-line-test",
+      "type": "line",
+      "source": "us_states",
+      "minzoom": 0,
+      "maxzoom": 24,
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "#00ff66",
+        "line-opacity": 1,
+        "line-width": 4
+      }
+    },
+    {
+      "id": "circle-test",
+      "type": "circle",
+      "source": "circle_test_point",
+      "minzoom": 0,
+      "maxzoom": 24,
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "circle-color": "#00ff66",
+        "circle-radius": 18,
+        "circle-opacity": 1,
+        "circle-stroke-color": "#0033ff",
+        "circle-stroke-width": 4
+      }
+    },
+    {
+      "id": "circle-label-test",
+      "type": "symbol",
+      "source": "circle_test_point",
+      "minzoom": 0,
+      "maxzoom": 24,
+      "layout": {
+        "visibility": "visible",
+        "text-field": "{name}",
+        "text-font": ["Noto Sans Regular"],
+        "text-size": 18,
+        "text-anchor": "bottom",
+        "text-offset": [0, -1.8]
+      },
+      "paint": {
+        "text-color": "#ffffff",
+        "text-halo-color": "#0033ff",
+        "text-halo-width": 1.5
+      }
+    },
+    {
+      "id": "us-states-label-test",
+      "type": "symbol",
+      "source": "us_states",
+      "minzoom": 0,
+      "maxzoom": 24,
+      "layout": {
+        "visibility": "visible",
+        "text-field": "{STATE_NAME}",
+        "text-font": ["Noto Sans Regular"],
+        "text-size": 14,
+        "text-anchor": "center",
+        "text-offset": [0, 0]
+      },
+      "paint": {
+        "text-color": "#ffff00",
+        "text-halo-color": "#000000",
+        "text-halo-width": 1.2
+      }
+    }
+  ],
+  "bearing": 0,
+  "sources": {
+    "maplibre": {
+      "url": "https://demotiles.maplibre.org/tiles/tiles.json",
+      "type": "vector"
+    },
+    "crimea": {
+      "type": "geojson",
+      "data": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [34.00905273547181, 46.55925987559425],
+              [34.00905273547181, 46.55925987559425]
+            ]
+          ]
+        }
+      }
+    },
+    "us_states": {
+      "type": "geojson",
+      "data": "/assets/geojson/us_states.geojson"
+    },
+    "circle_test_point": {
+      "type": "geojson",
+      "data": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "circle-test"
+            },
+            "geometry": {
+              "type": "Point",
+              "coordinates": [17.65431710431244, 32.954120326746775]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "version": 8,
+  "metadata": {
+    "maptiler:copyright": "This style was generated on MapTiler Cloud. Usage is governed by the license terms in https://github.com/maplibre/demotiles/blob/gh-pages/LICENSE",
+    "openmaptiles:version": "3.x"
+  }
+}

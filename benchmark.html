@@ -1,0 +1,148 @@
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Worker 与主线程性能对比</title>
+    <link
+      rel="stylesheet"
+      href="./node_modules/cesium/Build/Cesium/Widgets/widgets.css"
+    />
+    <script src="./node_modules/cesium/Build/CesiumUnminified/Cesium.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+      #toolbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 8px 12px;
+        background: #1a1a2e;
+        color: #eee;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      #toolbar button {
+        padding: 8px 16px;
+        background: #16213e;
+        border: 1px solid #0f3460;
+        color: #eee;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      #toolbar button:hover {
+        background: #0f3460;
+      }
+      #bench-row {
+        position: fixed;
+        top: 48px;
+        left: 0;
+        right: 0;
+        bottom: 200px;
+        display: flex;
+        gap: 4px;
+      }
+      .viewer-half {
+        flex: 1;
+        position: relative;
+        min-width: 0;
+      }
+      .viewer-half .label {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        padding: 4px 8px;
+        background: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        font-size: 12px;
+        z-index: 10;
+        border-radius: 4px;
+      }
+      #viewer-main,
+      #viewer-worker {
+        width: 100%;
+        height: 100%;
+      }
+      #report {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 200px;
+        padding: 12px;
+        overflow: auto;
+        background: #0d1117;
+        color: #c9d1d9;
+        font-size: 13px;
+        white-space: pre-wrap;
+      }
+      #report pre {
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="toolbar">
+      <button type="button" id="run">运行测试</button>
+      <label
+        style="display: flex; align-items: center; gap: 6px; cursor: pointer"
+      >
+        <input type="checkbox" id="swapMode" />
+        <span>调换左右模式</span>
+      </label>
+      <span id="status"
+        >左侧=主线程，右侧=Worker。15 秒内各 100 个 Box（边长
+        50000）加载与路径漫游。</span
+      >
+    </div>
+    <div id="bench-row">
+      <div class="viewer-half">
+        <span class="label" id="label-left">主线程</span>
+        <div id="viewer-main"></div>
+      </div>
+      <div class="viewer-half">
+        <span class="label" id="label-right">Worker</span>
+        <div id="viewer-worker"></div>
+      </div>
+    </div>
+    <div id="report" role="log">
+      运行后此处显示左侧主线程与右侧 Worker 的帧时间（分开）及对比结果。
+    </div>
+    <script type="module">
+      import { runBenchmark } from './examples/benchmark.js'
+      const runBtn = document.getElementById('run')
+      const swapCheckbox = document.getElementById('swapMode')
+      const labelLeft = document.getElementById('label-left')
+      const labelRight = document.getElementById('label-right')
+      const status = document.getElementById('status')
+      const reportEl = document.getElementById('report')
+
+      function updateLabels() {
+        const swap = swapCheckbox.checked
+        labelLeft.textContent = swap ? 'Worker' : '主线程'
+        labelRight.textContent = swap ? '主线程' : 'Worker'
+      }
+      swapCheckbox.addEventListener('change', updateLabels)
+      updateLabels()
+
+      runBtn.addEventListener('click', async () => {
+        runBtn.disabled = true
+        const swap = swapCheckbox.checked
+        status.textContent = swap
+          ? '运行中：先左侧 Worker 15 秒，再右侧主线程 15 秒，结果分开并对比…'
+          : '运行中：先左侧主线程 15 秒，再右侧 Worker 15 秒，结果分开并对比…'
+        reportEl.textContent = ''
+        await runBenchmark(swap)
+        status.textContent = '测试完成。'
+        runBtn.disabled = false
+      })
+    </script>
+  </body>
+</html>
